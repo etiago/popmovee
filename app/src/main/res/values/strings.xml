@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PopMovee</string>
+    <string name="most_popular_movies">Most Popular</string>
+    <string name="highest_rated_movies">Highest Rated</string>
+</resources>
