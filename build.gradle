@@ -12,6 +12,9 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
+plugins {
+    id "org.sonarqube" version "2.2.1"
+}
 
 allprojects {
     repositories {
@@ -22,3 +25,4 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+

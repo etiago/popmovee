@@ -3,6 +3,11 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_movie_details"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        android:title="@string/most_popular_movies"/>
     <ScrollView
         android:id="@+id/sv_details_layout"
         android:orientation="vertical"

@@ -1,13 +1,19 @@
 <resources>
     <string name="app_name">Pop Movees</string>
-
+    <string name="error_loading_movies">There was an error while loading the movies…</string>
     <!-- activity_main -->
     <string name="most_popular_movies">Most Popular</string>
+    <string name="highest_rated_movies">Highest Rated</string>
+    <string name="movie_sort_spinner_label">Movies by:</string>
+    <string-array name="movie_sort_array">
+        <item>@string/most_popular_movies</item>
+        <item>@string/highest_rated_movies</item>
+    </string-array>
 
     <!-- activity_movie_details -->
-    <string name="highest_rated_movies">Highest Rated</string>
     <string name="original_title_label">Original Title:</string>
     <string name="release_date_label">Release Date:</string>
     <string name="movie_poster_description">Movie Poster:</string>
     <string name="vote_average_label">Vote Average:</string>
+    <string name="vote_average_format">%d/10</string>
 </resources>

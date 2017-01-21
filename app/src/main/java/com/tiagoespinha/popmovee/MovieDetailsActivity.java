@@ -27,12 +27,14 @@ public class MovieDetailsActivity extends AppCompatActivity {
     ImageView mMoviePosterImageView;
     TextView mMovieReleaseDateTextView;
     TextView mMovieVoteAverageTextView;
+    Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
-
+        mToolbar = (Toolbar) findViewById(R.id.tb_movie_details);
+        setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
@@ -60,7 +62,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         mMovieReleaseDateTextView.setText(String.valueOf(movieMetadata.getReleaseDate().get(Calendar.YEAR)));
 
         mMovieVoteAverageTextView = (TextView) findViewById(R.id.tv_vote_average);
-        mMovieVoteAverageTextView.setText(String.valueOf(movieMetadata.getVoteAverage()) + "/10");
+        mMovieVoteAverageTextView.setText(getResources().getString(R.string.vote_average_format, (int) movieMetadata.getVoteAverage()));
 
 
     }

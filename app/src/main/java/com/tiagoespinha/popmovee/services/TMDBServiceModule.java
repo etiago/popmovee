@@ -26,7 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TMDBServiceModule {
     @Provides
     @Singleton
-    SharedPreferences providesSharedPreferences(Application application) {
+    SharedPreferences provideSharedPreferences(Application application) {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
