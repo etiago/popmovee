@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,42 +26,38 @@ public class MovieListDto {
     public List<MovieMetadata> getMovieMetadatas() {
         return movieMetadatas;
     }
+    private List<MovieMetadata> movieMetadatas;
+    private int page;
+    private int totalMovieCount;
+    private int totalPageCount;
 
-    public void setMovieMetadatas(List<MovieMetadata> movieMetadatas) {
+    private void setMovieMetadatas(List<MovieMetadata> movieMetadatas) {
         this.movieMetadatas = movieMetadatas;
     }
 
     public int getPage() {
         return page;
     }
-
-    public void setPage(int page) {
+    private void setPage(int page) {
         this.page = page;
     }
 
     public int getTotalMovieCount() {
         return totalMovieCount;
     }
-
-    public void setTotalMovieCount(int totalMovieCount) {
+    private void setTotalMovieCount(int totalMovieCount) {
         this.totalMovieCount = totalMovieCount;
     }
 
     public int getTotalPageCount() {
         return totalPageCount;
     }
-
-    public void setTotalPageCount(int totalPageCount) {
+    private void setTotalPageCount(int totalPageCount) {
         this.totalPageCount = totalPageCount;
     }
 
-    private List<MovieMetadata> movieMetadatas;
-    private int page;
-    private int totalMovieCount;
-    private int totalPageCount;
-
     private static final String MOVIE_POSTER_IMAGE_BASE_ENDPOINT = "https://image.tmdb.org/t/p/w342/";
-    public static final Uri MOVIE_POSTER_IMAGE_BASE_URI;
+    private static final Uri MOVIE_POSTER_IMAGE_BASE_URI;
     static {
         MOVIE_POSTER_IMAGE_BASE_URI = Uri.parse(MOVIE_POSTER_IMAGE_BASE_ENDPOINT);
     }
@@ -114,7 +109,7 @@ public class MovieListDto {
 
             newMovieListDto.setMovieMetadatas(metadatas);
         } catch (JSONException e) {
-            e.printStackTrace();
+            Log.w(MovieListDto.class.getSimpleName(),e);
         }
 
         return newMovieListDto;

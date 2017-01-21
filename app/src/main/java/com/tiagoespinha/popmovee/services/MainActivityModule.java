@@ -2,8 +2,6 @@ package com.tiagoespinha.popmovee.services;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
-
-import com.tiagoespinha.popmovee.PopMoveeApp;
 import com.tiagoespinha.popmovee.adapters.MovieThumbnailAdapter;
 
 import javax.inject.Singleton;
