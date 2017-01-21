@@ -1,6 +1,7 @@
 package com.tiagoespinha.popmovee.model;
 
 import android.net.Uri;
+import android.util.Log;
 
 import com.tiagoespinha.popmovee.services.TMDBService;
 
@@ -127,7 +128,7 @@ public class MovieListDto {
             cal.setTime(df.parse(date));
             return cal;
         } catch (ParseException e) {
-            e.printStackTrace();
+            Log.w(MovieListDto.class.getSimpleName(),e);
         }
         return null;
     }
@@ -140,7 +141,7 @@ public class MovieListDto {
                     .build()
                     .toString());
         } catch (MalformedURLException e) {
-            e.printStackTrace();
+            Log.w(MovieListDto.class.getSimpleName(),e);
         }
         return null;
     }
