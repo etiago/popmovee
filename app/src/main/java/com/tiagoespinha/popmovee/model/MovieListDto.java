@@ -3,8 +3,6 @@ package com.tiagoespinha.popmovee.model;
 import android.net.Uri;
 import android.util.Log;
 
-import com.tiagoespinha.popmovee.services.TMDBService;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,16 +21,23 @@ import java.util.List;
  */
 
 public class MovieListDto {
-    public List<MovieMetadata> getMovieMetadatas() {
-        return movieMetadatas;
+    public List<MovieMetadata> getMovieMetadata() {
+        return movieMetadata;
     }
-    private List<MovieMetadata> movieMetadatas;
+    private List<MovieMetadata> movieMetadata;
     private int page;
     private int totalMovieCount;
     private int totalPageCount;
 
-    private void setMovieMetadatas(List<MovieMetadata> movieMetadatas) {
-        this.movieMetadatas = movieMetadatas;
+    private static final String MOVIE_POSTER_IMAGE_BASE_ENDPOINT = "https://image.tmdb.org/t/p/w342/";
+    private static final Uri MOVIE_POSTER_IMAGE_BASE_URI;
+
+    static {
+        MOVIE_POSTER_IMAGE_BASE_URI = Uri.parse(MOVIE_POSTER_IMAGE_BASE_ENDPOINT);
+    }
+
+    private void setMovieMetadata(List<MovieMetadata> movieMetadata) {
+        this.movieMetadata = movieMetadata;
     }
 
     public int getPage() {
@@ -56,28 +61,22 @@ public class MovieListDto {
         this.totalPageCount = totalPageCount;
     }
 
-    private static final String MOVIE_POSTER_IMAGE_BASE_ENDPOINT = "https://image.tmdb.org/t/p/w342/";
-    private static final Uri MOVIE_POSTER_IMAGE_BASE_URI;
-    static {
-        MOVIE_POSTER_IMAGE_BASE_URI = Uri.parse(MOVIE_POSTER_IMAGE_BASE_ENDPOINT);
-    }
-
-    public static MovieListDto parseFromTMDBMovieResultSet(TMDBService.TMDBMovieResultSet tmdbMovieResultSet) {
+    public static MovieListDto parseFromTMDBMovieResultSet(TMDBMovieResultSet tmdbMovieResultSet) {
         MovieListDto newMovieListDto = new MovieListDto();
         List<MovieMetadata> movieMetadatas = new ArrayList<>();
 
-        newMovieListDto.setPage(tmdbMovieResultSet.page);
-        newMovieListDto.setTotalPageCount(tmdbMovieResultSet.totalPages);
-        newMovieListDto.setTotalMovieCount(tmdbMovieResultSet.totalResults);
-        newMovieListDto.setMovieMetadatas(movieMetadatas);
+        newMovieListDto.setPage(tmdbMovieResultSet.getPage());
+        newMovieListDto.setTotalPageCount(tmdbMovieResultSet.getTotalPages());
+        newMovieListDto.setTotalMovieCount(tmdbMovieResultSet.getTotalResults());
+        newMovieListDto.setMovieMetadata(movieMetadatas);
 
-        for (TMDBService.TMDBMovie tmdbMovie : tmdbMovieResultSet.results) {
+        for (TMDBMovie tmdbMovie : tmdbMovieResultSet.getResults()) {
             MovieMetadata movieMetadata = new MovieMetadata();
-            movieMetadata.setPosterThumbnailURL(buildPosterURLFromPath(tmdbMovie.posterPath));
-            movieMetadata.setVoteAverage(tmdbMovie.voteAverage);
-            movieMetadata.setOverview(tmdbMovie.overview);
-            movieMetadata.setOriginalTitle(tmdbMovie.originalTitle);
-            movieMetadata.setReleaseDate(buildCalendarFromDateString(tmdbMovie.releaseDate));
+            movieMetadata.setPosterThumbnailURL(buildPosterURLFromPath(tmdbMovie.getPosterPath()));
+            movieMetadata.setVoteAverage(tmdbMovie.getVoteAverage());
+            movieMetadata.setOverview(tmdbMovie.getOverview());
+            movieMetadata.setOriginalTitle(tmdbMovie.getOriginalTitle());
+            movieMetadata.setReleaseDate(buildCalendarFromDateString(tmdbMovie.getReleaseDate()));
             movieMetadatas.add(movieMetadata);
         }
 
@@ -107,7 +106,7 @@ public class MovieListDto {
                 metadatas.add(movieMetadata);
             }
 
-            newMovieListDto.setMovieMetadatas(metadatas);
+            newMovieListDto.setMovieMetadata(metadatas);
         } catch (JSONException e) {
             Log.w(MovieListDto.class.getSimpleName(),e);
         }

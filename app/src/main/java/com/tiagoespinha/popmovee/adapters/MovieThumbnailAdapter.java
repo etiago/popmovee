@@ -42,14 +42,18 @@ public class MovieThumbnailAdapter extends RecyclerView.Adapter<MovieThumbnailVi
 
     @Override
     public void onBindViewHolder(MovieThumbnailViewHolder holder, int position) {
-        if (position < 0 || position > mMovieMetadatas.size() - 1) return;
+        if (position < 0 || position > mMovieMetadatas.size() - 1) {
+            return;
+        }
 
         holder.setPosterMetadata(mMovieMetadatas.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (mMovieMetadatas == null) return 0;
+        if (mMovieMetadatas == null) {
+            return 0;
+        }
 
         return mMovieMetadatas.size();
     }

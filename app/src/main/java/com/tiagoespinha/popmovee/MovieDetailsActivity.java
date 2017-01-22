@@ -13,6 +13,9 @@ import com.tiagoespinha.popmovee.model.MovieMetadata;
 
 import java.util.Calendar;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by tiago on 18/01/2017.
  */
@@ -20,18 +23,20 @@ import java.util.Calendar;
 public class MovieDetailsActivity extends AppCompatActivity {
     public static final String MOVIE_METADATA_EXTRA_KEY = "MOVIE_METADATA_EXTRA_KEY";
 
-    TextView mMovieTitleTextView;
-    TextView mMoviePlotSynopsisTextView;
-    ImageView mMoviePosterImageView;
-    TextView mMovieReleaseDateTextView;
-    TextView mMovieVoteAverageTextView;
-    Toolbar mToolbar;
+    @BindView(R.id.tv_movie_title) TextView mMovieTitleTextView;
+    @BindView(R.id.tv_plot_synopsis) TextView mMoviePlotSynopsisTextView;
+    @BindView(R.id.iv_movie_poster) ImageView mMoviePosterImageView;
+    @BindView(R.id.tv_release_date) TextView mMovieReleaseDateTextView;
+    @BindView(R.id.tv_vote_average) TextView mMovieVoteAverageTextView;
+    @BindView(R.id.tb_movie_details) Toolbar mToolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_details);
-        mToolbar = (Toolbar) findViewById(R.id.tb_movie_details);
+
+        ButterKnife.bind(this);
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -43,25 +48,15 @@ public class MovieDetailsActivity extends AppCompatActivity {
             throw new AssertionError();
         }
 
-        MovieMetadata movieMetadata = (MovieMetadata) originatorIntent.getSerializableExtra(MOVIE_METADATA_EXTRA_KEY);
+        MovieMetadata movieMetadata = (MovieMetadata) originatorIntent.getParcelableExtra(MOVIE_METADATA_EXTRA_KEY);
 
-        mMovieTitleTextView = (TextView) findViewById(R.id.tv_movie_title);
         mMovieTitleTextView.setText(movieMetadata.getOriginalTitle());
-
-        mMoviePlotSynopsisTextView = (TextView) findViewById(R.id.tv_plot_synopsis);
         mMoviePlotSynopsisTextView.setText(movieMetadata.getOverview());
-
-        mMoviePosterImageView = (ImageView) findViewById(R.id.iv_movie_poster);
         Picasso.with(this)
                 .load(movieMetadata.getPosterThumbnailURL().toString())
                 .into(mMoviePosterImageView);
 
-        mMovieReleaseDateTextView = (TextView) findViewById(R.id.tv_release_date);
         mMovieReleaseDateTextView.setText(String.valueOf(movieMetadata.getReleaseDate().get(Calendar.YEAR)));
-
-        mMovieVoteAverageTextView = (TextView) findViewById(R.id.tv_vote_average);
         mMovieVoteAverageTextView.setText(getResources().getString(R.string.vote_average_format, (int) movieMetadata.getVoteAverage()));
-
-
     }
 }

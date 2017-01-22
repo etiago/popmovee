@@ -1,6 +1,7 @@
 package com.tiagoespinha.popmovee;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -18,8 +19,12 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
+
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
+
+        Intent openMainActivityIntent = new Intent(appContext, MainActivity.class);
+        appContext.startActivity(openMainActivityIntent);
 
         assertEquals("com.tiagoespinha.popmovee", appContext.getPackageName());
     }

@@ -1,25 +1,15 @@
 package com.tiagoespinha.popmovee.viewholders;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Movie;
-import android.os.Bundle;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.support.v4.app.ShareCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 import com.tiagoespinha.popmovee.MovieDetailsActivity;
 import com.tiagoespinha.popmovee.R;
 import com.tiagoespinha.popmovee.model.MovieMetadata;
-
-import java.net.URL;
-import java.util.Random;
 
 /**
  * Created by tiago on 15/01/2017.

@@ -13,25 +13,30 @@ import com.tiagoespinha.popmovee.services.MainActivityModule;
  */
 
 public class PopMoveeApp extends Application {
-    private float dpHeight;
-    private float dpWidth;
     private static int movieListSpanLandscape;
     private static int movieListSpanPortrait;
     private MainActivityComponent mMainActivityComponent;
+    private static boolean mShowPopularMovies;
 
-    public PopMoveeApp() {
+    public static boolean isShowingPopularMovies() {
+        return mShowPopularMovies;
+    }
 
+    public static void setShowingPopularMovies(boolean showPopularMovies) {
+        mShowPopularMovies = showPopularMovies;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        mShowPopularMovies = true;
+
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        dpHeight = displayMetrics.heightPixels / displayMetrics.density;
-        dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-        movieListSpanLandscape = Math.min(6,Math.round(dpHeight/342)*3);
-        movieListSpanPortrait = Math.min(6,Math.round(dpWidth/342)*3);
+        float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
+        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
+        movieListSpanLandscape = Math.min(6,Math.round(dpHeight /342)*3);
+        movieListSpanPortrait = Math.min(6,Math.round(dpWidth /342)*3);
         mMainActivityComponent = DaggerMainActivityComponent
                 .builder()
                 .mainActivityModule(new MainActivityModule(this))
