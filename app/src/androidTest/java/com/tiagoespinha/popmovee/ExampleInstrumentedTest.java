@@ -3,11 +3,19 @@ package com.tiagoespinha.popmovee;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.RecyclerView;
+import android.widget.Spinner;
 
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
 import static org.junit.Assert.*;
 
 /**
@@ -17,15 +25,22 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
+            MainActivity.class);
+
     @Test
-    public void useAppContext() throws Exception {
+    public void selectedMovieListingIsPopularMovies() throws Exception {
 
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getTargetContext();
+        final String popularMovies = mActivityRule.getActivity().getString(R.string.most_popular_movies);
 
-        Intent openMainActivityIntent = new Intent(appContext, MainActivity.class);
-        appContext.startActivity(openMainActivityIntent);
+        onView(withId(R.id.spinner_nav)).check(matches(withSpinnerText(popularMovies)));
+    }
 
-        assertEquals("com.tiagoespinha.popmovee", appContext.getPackageName());
+    @Test
+    public void noMoviesLoadedByDefault() throws Exception {
+        onView(withId(R.id.rv_movie_grid)).check((view, noViewFoundException) -> {
+            System.out.println(((RecyclerView)view).getLayoutManager().getChildCount());
+            assertTrue(((RecyclerView)view).getLayoutManager().getChildCount() == 0);});
     }
 }
