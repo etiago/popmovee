@@ -16,17 +16,22 @@ import java.util.List;
  * Created by tiago on 15/01/2017.
  */
 
-public class MovieThumbnailAdapter extends RecyclerView.Adapter<MovieThumbnailViewHolder> {
+public class MovieThumbnailAdapter
+        extends RecyclerView.Adapter<MovieThumbnailViewHolder>
+        implements IMovieThumbnailAdapter<MovieMetadata> {
     private List<MovieMetadata> mMovieMetadatas;
 
     public MovieThumbnailAdapter() {
         mMovieMetadatas = new ArrayList<>();
     }
 
+    @Override
     public void addMovieMetadata(List<MovieMetadata> movieMetadatas) {
         mMovieMetadatas.addAll(movieMetadatas);
         notifyDataSetChanged();
     }
+
+    @Override
     public void setMovieMetadata(List<MovieMetadata> movieMetadatas) {
         mMovieMetadatas = movieMetadatas;
         notifyDataSetChanged();

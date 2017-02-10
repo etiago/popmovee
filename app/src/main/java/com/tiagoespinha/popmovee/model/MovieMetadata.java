@@ -20,7 +20,7 @@ public class MovieMetadata implements Parcelable {
     private Calendar releaseDate;
 
     public MovieMetadata() {
-
+        /* Default constructor */
     }
 
     private MovieMetadata(Parcel in) {

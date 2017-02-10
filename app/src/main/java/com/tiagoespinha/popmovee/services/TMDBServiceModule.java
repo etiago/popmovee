@@ -24,13 +24,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class TMDBServiceModule {
     @Provides
     @Singleton
-    SharedPreferences provideSharedPreferences(Application application) {
+    public SharedPreferences provideSharedPreferences(Application application) {
         return PreferenceManager.getDefaultSharedPreferences(application);
     }
 
     @Provides
     @Singleton
-    static TMDBService provideTMDBService() {
+    public TMDBService provideTMDBService() {
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder();
 
         clientBuilder.addInterceptor(chain -> {

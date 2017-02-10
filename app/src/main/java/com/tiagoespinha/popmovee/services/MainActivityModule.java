@@ -2,11 +2,18 @@ package com.tiagoespinha.popmovee.services;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
+import android.widget.ArrayAdapter;
+
+import com.tiagoespinha.popmovee.R;
+import com.tiagoespinha.popmovee.adapters.IMovieThumbnailAdapter;
 import com.tiagoespinha.popmovee.adapters.MovieThumbnailAdapter;
 import com.tiagoespinha.popmovee.consumers.AddToMovieListConsumerMainActivity;
 import com.tiagoespinha.popmovee.consumers.MovieListConsumerMainActivity;
 import com.tiagoespinha.popmovee.consumers.ThrowableConsumerMainActivity;
 import com.tiagoespinha.popmovee.listeners.MovieEndlessRecyclerViewScrollListener;
+import com.tiagoespinha.popmovee.listeners.NavigationSpinnerOnItemSelectedListener;
+import com.tiagoespinha.popmovee.model.MovieMetadata;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 import dagger.Module;
@@ -31,26 +38,46 @@ public class MainActivityModule {
 
     @Provides
     @Singleton
-    static MovieThumbnailAdapter provideMovieThumbnailAdapter() {
+    public IMovieThumbnailAdapter<MovieMetadata> provideMovieThumbnailAdapter() {
         return new MovieThumbnailAdapter();
     }
 
     @Provides
     @Singleton
-    static MovieListConsumerMainActivity provideMovieListConsumerMainActivity(MovieThumbnailAdapter movieThumbnailAdapter) {
+    public MovieListConsumerMainActivity provideMovieListConsumerMainActivity(IMovieThumbnailAdapter<MovieMetadata> movieThumbnailAdapter) {
         return new MovieListConsumerMainActivity(movieThumbnailAdapter);
     }
 
     @Provides
     @Singleton
-    static AddToMovieListConsumerMainActivity provideAddToMovieListConsumerMainActivity(MovieThumbnailAdapter movieThumbnailAdapter) {
+    public AddToMovieListConsumerMainActivity provideAddToMovieListConsumerMainActivity(IMovieThumbnailAdapter<MovieMetadata> movieThumbnailAdapter) {
         return new AddToMovieListConsumerMainActivity(movieThumbnailAdapter);
     }
 
     @Provides
     @Singleton
-    static ThrowableConsumerMainActivity provideThrowableConsumerMainActivity() {
+    public ThrowableConsumerMainActivity provideThrowableConsumerMainActivity() {
         return new ThrowableConsumerMainActivity();
+    }
+
+    @Provides
+    @Singleton
+    public NavigationSpinnerOnItemSelectedListener
+        provideNavigationSpinnerOnItemSelected(TMDBService tmdbService,
+                                               MovieListConsumerMainActivity movieListConsumerMainActivity,
+                                               ThrowableConsumerMainActivity throwableConsumerMainActivity) {
+        return new NavigationSpinnerOnItemSelectedListener(tmdbService, movieListConsumerMainActivity, throwableConsumerMainActivity);
+    }
+
+    @Provides
+    @Singleton
+    public ArrayAdapter<CharSequence> provideNavigationSpinnerArrayAdapter(Context context) {
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(context,
+                R.array.movie_sort_array,
+                android.R.layout.simple_spinner_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        return arrayAdapter;
     }
 
     @Provides
@@ -69,7 +96,7 @@ public class MainActivityModule {
     }
 
     @Provides
-    MovieEndlessRecyclerViewScrollListener provideEndlessRecyclerViewScrollListener(
+    public MovieEndlessRecyclerViewScrollListener provideEndlessRecyclerViewScrollListener(
             TMDBService tmdbService,
             @Named("cached") GridLayoutManager gridLayoutManager,
             AddToMovieListConsumerMainActivity addToMovieListConsumerMainActivity,
@@ -79,4 +106,6 @@ public class MainActivityModule {
                 throwableConsumerMainActivity,
                 tmdbService);
     }
+
+
 }

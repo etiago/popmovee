@@ -12,7 +12,6 @@ android {
         versionName "1.0"
         jackOptions {
             enabled true
-
         }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -48,8 +47,9 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:2.6.5'
-
+    androidTestCompile 'org.mockito:mockito-core:2.6.8'
+    androidTestCompile "org.mockito:mockito-android:2.6.8"
+    androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:2.7"
 }
 
 repositories {

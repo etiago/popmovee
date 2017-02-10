@@ -1,9 +1,8 @@
 package com.tiagoespinha.popmovee.consumers;
 
-import android.content.Context;
-
-import com.tiagoespinha.popmovee.adapters.MovieThumbnailAdapter;
+import com.tiagoespinha.popmovee.adapters.IMovieThumbnailAdapter;
 import com.tiagoespinha.popmovee.model.MovieListDto;
+import com.tiagoespinha.popmovee.model.MovieMetadata;
 import com.tiagoespinha.popmovee.model.TMDBMovieResultSet;
 
 /**
@@ -11,7 +10,7 @@ import com.tiagoespinha.popmovee.model.TMDBMovieResultSet;
  */
 
 public class AddToMovieListConsumerMainActivity extends MovieListConsumerMainActivity {
-    public AddToMovieListConsumerMainActivity(MovieThumbnailAdapter movieThumbnailAdapter) {
+    public AddToMovieListConsumerMainActivity(IMovieThumbnailAdapter<MovieMetadata> movieThumbnailAdapter) {
         super(movieThumbnailAdapter);
     }
 

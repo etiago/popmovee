@@ -56,4 +56,8 @@ public class PopMoveeApp extends Application {
     public MainActivityComponent getMainActivityComponent() {
         return mMainActivityComponent;
     }
+
+    public void setMainActivityComponent(MainActivityComponent mainActivityComponent) {
+        mMainActivityComponent = mainActivityComponent;
+    }
 }

@@ -142,4 +142,9 @@ public class TMDBMovie {
     public void setVoteAverage(float voteAverage) {
         this.voteAverage = voteAverage;
     }
+
+    @Override
+    public String toString() {
+        return getTitle();
+    }
 }
