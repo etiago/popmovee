@@ -1,4 +1,4 @@
-package com.tiagoespinha.popmovee.model;
+package com.tiagoespinha.popmovee.retrofit2.model;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -8,6 +8,7 @@ import java.util.List;
  * Created by tiago on 22/01/2017.
  */
 public class TMDBMovieResultSet {
+    private int id;
     private int page;
     private List<TMDBMovie> results;
     @SerializedName("total_results")

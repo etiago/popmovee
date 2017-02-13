@@ -1,4 +1,4 @@
-package com.tiagoespinha.popmovee.model;
+package com.tiagoespinha.popmovee.retrofit2.model;
 
 import com.google.gson.annotations.SerializedName;
 

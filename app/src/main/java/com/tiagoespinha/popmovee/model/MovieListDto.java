@@ -3,9 +3,8 @@ package com.tiagoespinha.popmovee.model;
 import android.net.Uri;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.tiagoespinha.popmovee.retrofit2.model.TMDBMovie;
+import com.tiagoespinha.popmovee.retrofit2.model.TMDBMovieResultSet;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -78,37 +77,6 @@ public class MovieListDto {
             movieMetadata.setOriginalTitle(tmdbMovie.getOriginalTitle());
             movieMetadata.setReleaseDate(buildCalendarFromDateString(tmdbMovie.getReleaseDate()));
             movieMetadatas.add(movieMetadata);
-        }
-
-        return newMovieListDto;
-    }
-
-    public static MovieListDto parseFromJSON(String jsonMovieListDto) {
-        MovieListDto newMovieListDto = new MovieListDto();
-        List<MovieMetadata> metadatas = new ArrayList<>();
-
-        try {
-            JSONObject jsonObject = new JSONObject(jsonMovieListDto);
-            newMovieListDto.setPage(jsonObject.getInt("page"));
-            newMovieListDto.setTotalMovieCount(jsonObject.getInt("total_results"));
-            newMovieListDto.setTotalPageCount(jsonObject.getInt("total_pages"));
-
-            JSONArray movieResults = jsonObject.getJSONArray("results");
-
-            for(int i = 0; i<movieResults.length(); i++) {
-                JSONObject singleMovie = movieResults.getJSONObject(i);
-                MovieMetadata movieMetadata = new MovieMetadata();
-                movieMetadata.setPosterThumbnailURL(buildPosterURLFromPath(singleMovie.getString("poster_path")));
-                movieMetadata.setOriginalTitle(singleMovie.getString("original_title"));
-                movieMetadata.setOverview(singleMovie.getString("overview"));
-                movieMetadata.setVoteAverage(singleMovie.getDouble("vote_average"));
-                movieMetadata.setReleaseDate(buildCalendarFromDateString(singleMovie.getString("release_date")));
-                metadatas.add(movieMetadata);
-            }
-
-            newMovieListDto.setMovieMetadata(metadatas);
-        } catch (JSONException e) {
-            Log.w(MovieListDto.class.getSimpleName(),e);
         }
 
         return newMovieListDto;

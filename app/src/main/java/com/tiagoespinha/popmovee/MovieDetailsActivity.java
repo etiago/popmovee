@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,7 +49,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
             throw new AssertionError();
         }
 
-        MovieMetadata movieMetadata = (MovieMetadata) originatorIntent.getParcelableExtra(MOVIE_METADATA_EXTRA_KEY);
+        MovieMetadata movieMetadata = originatorIntent.getParcelableExtra(MOVIE_METADATA_EXTRA_KEY);
 
         mMovieTitleTextView.setText(movieMetadata.getOriginalTitle());
         mMoviePlotSynopsisTextView.setText(movieMetadata.getOverview());
@@ -58,5 +59,8 @@ public class MovieDetailsActivity extends AppCompatActivity {
 
         mMovieReleaseDateTextView.setText(String.valueOf(movieMetadata.getReleaseDate().get(Calendar.YEAR)));
         mMovieVoteAverageTextView.setText(getResources().getString(R.string.vote_average_format, (int) movieMetadata.getVoteAverage()));
+
+        TrailerListFragment trailerListFragment = (TrailerListFragment)getSupportFragmentManager().findFragmentById(R.id.fg_movie_list);
+        trailerListFragment.setMovieTrailerMetadata(null);
     }
 }

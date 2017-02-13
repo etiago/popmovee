@@ -6,7 +6,7 @@ import android.widget.AdapterView;
 import com.tiagoespinha.popmovee.PopMoveeApp;
 import com.tiagoespinha.popmovee.consumers.MovieListConsumerMainActivity;
 import com.tiagoespinha.popmovee.consumers.ThrowableConsumerMainActivity;
-import com.tiagoespinha.popmovee.model.TMDBMovieResultSet;
+import com.tiagoespinha.popmovee.retrofit2.model.TMDBMovieResultSet;
 import com.tiagoespinha.popmovee.services.TMDBService;
 
 import javax.inject.Inject;

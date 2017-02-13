@@ -78,8 +78,13 @@
                     android:layout_below="@id/iv_movie_poster"/>
             </RelativeLayout>
 
-
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fg_movie_list"
+                android:name="com.tiagoespinha.popmovee.TrailerListFragment"/>
 
         </LinearLayout>
+
     </ScrollView>
 </LinearLayout>

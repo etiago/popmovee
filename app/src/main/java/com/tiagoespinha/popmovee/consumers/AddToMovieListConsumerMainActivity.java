@@ -3,7 +3,7 @@ package com.tiagoespinha.popmovee.consumers;
 import com.tiagoespinha.popmovee.adapters.IMovieThumbnailAdapter;
 import com.tiagoespinha.popmovee.model.MovieListDto;
 import com.tiagoespinha.popmovee.model.MovieMetadata;
-import com.tiagoespinha.popmovee.model.TMDBMovieResultSet;
+import com.tiagoespinha.popmovee.retrofit2.model.TMDBMovieResultSet;
 
 /**
  * Created by tiago on 22/01/2017.

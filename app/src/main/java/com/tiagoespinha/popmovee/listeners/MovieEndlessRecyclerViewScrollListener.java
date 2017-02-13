@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.tiagoespinha.popmovee.PopMoveeApp;
 import com.tiagoespinha.popmovee.consumers.AddToMovieListConsumerMainActivity;
 import com.tiagoespinha.popmovee.consumers.ThrowableConsumerMainActivity;
-import com.tiagoespinha.popmovee.model.TMDBMovieResultSet;
+import com.tiagoespinha.popmovee.retrofit2.model.TMDBMovieResultSet;
 import com.tiagoespinha.popmovee.services.TMDBService;
 import com.tiagoespinha.popmovee.utils.EndlessRecyclerViewScrollListener;
 
