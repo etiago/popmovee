@@ -16,7 +16,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:id="@+id/ll_vertical_layout">
 
             <TextView
                 android:layout_width="match_parent"
@@ -42,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -66,6 +68,19 @@
                     android:layout_below="@id/tv_release_date"/>
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_star_icon"
+                    android:textSize="32sp"
+                    android:paddingLeft="35dp"
+                    android:paddingStart="35dp"
+                    android:layout_toRightOf="@id/iv_movie_poster"
+                    android:layout_toEndOf="@id/iv_movie_poster"
+                    android:layout_below="@id/tv_vote_average"
+                    android:text="@string/favorite_icon_unclicked"
+                    android:textColor="@color/colorAccent"/>
+
+                <TextView
                     android:id="@+id/tv_plot_synopsis"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -83,6 +98,12 @@
                 android:layout_height="match_parent"
                 android:id="@+id/fg_movie_list"
                 android:name="com.tiagoespinha.popmovee.TrailerListFragment"/>
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/fg_review_list"
+                android:name="com.tiagoespinha.popmovee.ReviewListFragment"/>
 
         </LinearLayout>
 

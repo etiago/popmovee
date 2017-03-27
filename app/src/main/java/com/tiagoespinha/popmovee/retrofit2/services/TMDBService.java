@@ -1,6 +1,7 @@
-package com.tiagoespinha.popmovee.services;
+package com.tiagoespinha.popmovee.retrofit2.services;
 
 import com.tiagoespinha.popmovee.retrofit2.model.TMDBMovieResultSet;
+import com.tiagoespinha.popmovee.retrofit2.model.TMDBMovieReviewResultSet;
 import com.tiagoespinha.popmovee.retrofit2.model.TMDBMovieVideoResultSet;
 
 import io.reactivex.Observable;
@@ -27,4 +28,7 @@ public interface TMDBService {
 
     @GET("/3/movie/{movieid}/videos")
     Observable<TMDBMovieVideoResultSet> listVideosForMovieId(@Path("movieid") int movieId);
+
+    @GET("/3/movie/{movieid}/reviews")
+    Observable<TMDBMovieReviewResultSet> listReviewsForMovieId(@Path("movieid") int movieId);
 }

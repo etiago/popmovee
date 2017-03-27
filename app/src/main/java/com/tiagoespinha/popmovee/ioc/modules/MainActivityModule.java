@@ -1,27 +1,33 @@
-package com.tiagoespinha.popmovee.services;
+package com.tiagoespinha.popmovee.ioc.modules;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.tiagoespinha.popmovee.MovieListType;
+import com.tiagoespinha.popmovee.PopMoveeApp;
 import com.tiagoespinha.popmovee.R;
 import com.tiagoespinha.popmovee.adapters.IMovieThumbnailAdapter;
 import com.tiagoespinha.popmovee.adapters.MovieThumbnailAdapter;
-import com.tiagoespinha.popmovee.consumers.AddToMovieListConsumerMainActivity;
-import com.tiagoespinha.popmovee.consumers.MovieListConsumerMainActivity;
-import com.tiagoespinha.popmovee.consumers.ThrowableConsumerMainActivity;
+import com.tiagoespinha.popmovee.rx.consumers.AddToMovieListConsumerMainActivity;
+import com.tiagoespinha.popmovee.rx.consumers.MovieListConsumerMainActivity;
 import com.tiagoespinha.popmovee.listeners.MovieEndlessRecyclerViewScrollListener;
 import com.tiagoespinha.popmovee.listeners.NavigationSpinnerOnItemSelectedListener;
 import com.tiagoespinha.popmovee.model.MovieMetadata;
+import com.tiagoespinha.popmovee.retrofit2.services.TMDBService;
+
+import java.util.function.Function;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.functions.Consumer;
 
-/**
- * Created by tiago on 20/01/2017.
- */
 @Module(includes = TMDBServiceModule.class)
 public class MainActivityModule {
     private final Context mContext;
@@ -56,17 +62,36 @@ public class MainActivityModule {
 
     @Provides
     @Singleton
-    public ThrowableConsumerMainActivity provideThrowableConsumerMainActivity() {
-        return new ThrowableConsumerMainActivity();
+    public Function<Spinner, Consumer<Throwable>> provideTMDBFetchErrorHandler(
+            Context context,
+            ArrayAdapter<CharSequence> navigatonMenuArrayAdapter) {
+        return (spinner) -> new Consumer<Throwable>() {
+            private Toast toast;
+
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                int favoritePosition =
+                        navigatonMenuArrayAdapter
+                                .getPosition(context.getString(R.string.favorite_movies));
+
+                spinner.setSelection(favoritePosition);
+                if (toast != null) {
+                    toast.cancel();
+                }
+                toast = Toast.makeText(mContext, mContext.getString(R.string.error_loading_movies_showing_favorites), Toast.LENGTH_LONG);
+                toast.show();
+            }
+        };
     }
 
     @Provides
     @Singleton
     public NavigationSpinnerOnItemSelectedListener
-        provideNavigationSpinnerOnItemSelected(TMDBService tmdbService,
+        provideNavigationSpinnerOnItemSelected(Context context,
+                                               TMDBService tmdbService,
                                                MovieListConsumerMainActivity movieListConsumerMainActivity,
-                                               ThrowableConsumerMainActivity throwableConsumerMainActivity) {
-        return new NavigationSpinnerOnItemSelectedListener(tmdbService, movieListConsumerMainActivity, throwableConsumerMainActivity);
+                                               Function<Spinner, Consumer<Throwable>> httpErrorHandler) {
+        return new NavigationSpinnerOnItemSelectedListener(context, tmdbService, movieListConsumerMainActivity, httpErrorHandler);
     }
 
     @Provides
@@ -97,13 +122,15 @@ public class MainActivityModule {
 
     @Provides
     public MovieEndlessRecyclerViewScrollListener provideEndlessRecyclerViewScrollListener(
+            Context context,
             TMDBService tmdbService,
             @Named("cached") GridLayoutManager gridLayoutManager,
             AddToMovieListConsumerMainActivity addToMovieListConsumerMainActivity,
-            ThrowableConsumerMainActivity throwableConsumerMainActivity) {
-        return new MovieEndlessRecyclerViewScrollListener(gridLayoutManager,
+            Function<Spinner, Consumer<Throwable>> httpErrorHandler) {
+        return new MovieEndlessRecyclerViewScrollListener(context,
+                gridLayoutManager,
                 addToMovieListConsumerMainActivity,
-                throwableConsumerMainActivity,
+                httpErrorHandler,
                 tmdbService);
     }
 

@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class TMDBMovieVideoResultSet {
+public class TMDBMovieReviewResultSet {
     public int getId() {
         return id;
     }
@@ -13,15 +13,15 @@ public class TMDBMovieVideoResultSet {
         this.id = id;
     }
 
-    public List<TMDBMovieVideo> getMovieVideoList() {
-        return movieVideoList;
+    public List<TMDBMovieReview> getMovieReviewList() {
+        return movieReviewList;
     }
 
-    public void setMovieVideoList(List<TMDBMovieVideo> movieVideoList) {
-        this.movieVideoList = movieVideoList;
+    public void setMovieReviewList(List<TMDBMovieReview> movieReviewList) {
+        this.movieReviewList = movieReviewList;
     }
 
     private int id;
     @SerializedName("results")
-    private List<TMDBMovieVideo> movieVideoList;
+    private List<TMDBMovieReview> movieReviewList;
 }

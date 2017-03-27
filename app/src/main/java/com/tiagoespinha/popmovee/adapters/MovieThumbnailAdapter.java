@@ -11,6 +11,7 @@ import com.tiagoespinha.popmovee.viewholders.MovieThumbnailViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by tiago on 15/01/2017.

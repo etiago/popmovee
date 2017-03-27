@@ -11,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.tiagoespinha.popmovee.adapters.IMovieThumbnailAdapter;
-import com.tiagoespinha.popmovee.consumers.AddToMovieListConsumerMainActivity;
+import com.tiagoespinha.popmovee.rx.consumers.AddToMovieListConsumerMainActivity;
 import com.tiagoespinha.popmovee.listeners.MovieEndlessRecyclerViewScrollListener;
 import com.tiagoespinha.popmovee.listeners.NavigationSpinnerOnItemSelectedListener;
 import com.tiagoespinha.popmovee.model.MovieMetadata;

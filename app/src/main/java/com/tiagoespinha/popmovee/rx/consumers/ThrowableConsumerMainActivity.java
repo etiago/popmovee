@@ -1,4 +1,4 @@
-package com.tiagoespinha.popmovee.consumers;
+package com.tiagoespinha.popmovee.rx.consumers;
 
 import android.util.Log;
 

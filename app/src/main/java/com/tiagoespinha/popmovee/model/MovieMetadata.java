@@ -13,6 +13,7 @@ import java.util.Calendar;
  */
 
 public class MovieMetadata implements Parcelable {
+    private int id;
     private String originalTitle;
     private URL posterThumbnailURL;
     private String overview;
@@ -24,6 +25,7 @@ public class MovieMetadata implements Parcelable {
     }
 
     private MovieMetadata(Parcel in) {
+        id = in.readInt();
         originalTitle = in.readString();
         try {
             posterThumbnailURL = new URL(in.readString());
@@ -51,38 +53,44 @@ public class MovieMetadata implements Parcelable {
     public String getOriginalTitle() {
         return originalTitle;
     }
-    void setOriginalTitle(String originalTitle) {
+    public void setOriginalTitle(String originalTitle) {
         this.originalTitle = originalTitle;
     }
 
     public URL getPosterThumbnailURL() {
         return posterThumbnailURL;
     }
-    void setPosterThumbnailURL(URL posterThumbnailURL) {
+    public void setPosterThumbnailURL(URL posterThumbnailURL) {
         this.posterThumbnailURL = posterThumbnailURL;
     }
 
     public String getOverview() {
         return overview;
     }
-    void setOverview(String overview) {
+    public void setOverview(String overview) {
         this.overview = overview;
     }
 
     public double getVoteAverage() {
         return voteAverage;
     }
-    void setVoteAverage(double voteAverage) {
+    public void setVoteAverage(double voteAverage) {
         this.voteAverage = voteAverage;
     }
 
     public Calendar getReleaseDate() {
         return releaseDate;
     }
-    void setReleaseDate(Calendar releaseDate) {
+    public void setReleaseDate(Calendar releaseDate) {
         this.releaseDate = releaseDate;
     }
 
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     @Override
     public int describeContents() {
         return 0;
@@ -90,6 +98,7 @@ public class MovieMetadata implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(originalTitle);
         dest.writeString(posterThumbnailURL.toString());
         dest.writeString(overview);

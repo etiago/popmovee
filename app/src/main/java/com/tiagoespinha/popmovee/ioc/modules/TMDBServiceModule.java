@@ -1,10 +1,11 @@
-package com.tiagoespinha.popmovee.services;
+package com.tiagoespinha.popmovee.ioc.modules;
 
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import com.tiagoespinha.popmovee.retrofit2.services.TMDBService;
 
 import javax.inject.Singleton;
 

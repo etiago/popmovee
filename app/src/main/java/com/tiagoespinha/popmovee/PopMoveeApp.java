@@ -4,33 +4,32 @@ import android.app.Application;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
 
-import com.tiagoespinha.popmovee.services.DaggerMainActivityComponent;
-import com.tiagoespinha.popmovee.services.MainActivityComponent;
-import com.tiagoespinha.popmovee.services.MainActivityModule;
-
-/**
- * Created by tiago on 19/01/2017.
- */
+import com.tiagoespinha.popmovee.ioc.components.DaggerMainActivityComponent;
+import com.tiagoespinha.popmovee.ioc.components.DaggerMovieDetailsActivityComponent;
+import com.tiagoespinha.popmovee.ioc.components.MainActivityComponent;
+import com.tiagoespinha.popmovee.ioc.components.MovieDetailsActivityComponent;
+import com.tiagoespinha.popmovee.ioc.modules.MainActivityModule;
 
 public class PopMoveeApp extends Application {
     private static int movieListSpanLandscape;
     private static int movieListSpanPortrait;
     private MainActivityComponent mMainActivityComponent;
-    private static boolean mShowPopularMovies;
+    private MovieDetailsActivityComponent mMovieDetailsActivityComponent;
+    private static MovieListType mMovieListType;
 
-    public static boolean isShowingPopularMovies() {
-        return mShowPopularMovies;
+    public static MovieListType getMovieListType() {
+        return mMovieListType;
     }
 
-    public static void setShowingPopularMovies(boolean showPopularMovies) {
-        mShowPopularMovies = showPopularMovies;
+    public static void setMovieListType(MovieListType movieListType) {
+        mMovieListType = movieListType;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mShowPopularMovies = true;
+        mMovieListType = MovieListType.MOST_POPULAR;
 
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
@@ -41,6 +40,8 @@ public class PopMoveeApp extends Application {
                 .builder()
                 .mainActivityModule(new MainActivityModule(this))
                 .build();
+
+        mMovieDetailsActivityComponent = DaggerMovieDetailsActivityComponent.create();
     }
 
     public static int getMovieListSpan(int orientation){
@@ -55,6 +56,9 @@ public class PopMoveeApp extends Application {
 
     public MainActivityComponent getMainActivityComponent() {
         return mMainActivityComponent;
+    }
+    public MovieDetailsActivityComponent getMovieDetailsActivityComponent() {
+        return mMovieDetailsActivityComponent;
     }
 
     public void setMainActivityComponent(MainActivityComponent mainActivityComponent) {

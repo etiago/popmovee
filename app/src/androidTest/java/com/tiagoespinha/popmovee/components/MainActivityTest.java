@@ -1,21 +1,9 @@
 package com.tiagoespinha.popmovee.components;
 
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.tiagoespinha.popmovee.MainActivity;
-import com.tiagoespinha.popmovee.PopMoveeApp;
-import com.tiagoespinha.popmovee.services.DaggerMainActivityComponent;
-import com.tiagoespinha.popmovee.services.MainActivityComponent;
-
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.runner.RunWith;
-
-import javax.inject.Singleton;
-
-import dagger.Component;
 
 /**
  * Created by tiago on 24/01/2017.

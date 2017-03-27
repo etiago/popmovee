@@ -1,13 +1,18 @@
 <resources>
     <string name="app_name">Pop Movees</string>
     <string name="error_loading_movies">There was an error while loading the movies…</string>
+    <string name="error_loading_movies_showing_favorites">There was an error loading the movies... Showing locally stored favorites.</string>
+    <string name="error_loading_movies_showing_local_data">There was an error loading the movies... Showing basic movie information.</string>
+
     <!-- activity_main -->
     <string name="most_popular_movies">Most Popular</string>
     <string name="highest_rated_movies">Highest Rated</string>
+    <string name="favorite_movies">Favorites</string>
     <string name="movie_sort_spinner_label">Movies by:</string>
     <string-array name="movie_sort_array">
         <item>@string/most_popular_movies</item>
         <item>@string/highest_rated_movies</item>
+        <item>@string/favorite_movies</item>
     </string-array>
 
     <!-- activity_movie_details -->
@@ -16,4 +21,15 @@
     <string name="movie_poster_description">Movie Poster:</string>
     <string name="vote_average_label">Vote Average:</string>
     <string name="vote_average_format">%d/10</string>
+    <string name="no_image_available">No Image Available</string>
+
+    <string name="trailer_prefix">Trailer: %s</string>
+    <string name="youtube_base_uri" translatable="false">https://www.youtube.com/watch?v=%s</string>
+    <string name="favorite_icon_clicked" translatable="false">★</string>
+    <string name="favorite_icon_unclicked" translatable="false">☆</string>
+    <string name="trailers">Trailers</string>
+    <string name="reviews">Reviews</string>
+    <string name="review_by">Review by %s</string>
+    <string name="share_trailer">Share top trailer to…</string>
+    <string name="share_text">I thought you would like this trailer! %s</string>
 </resources>

@@ -1,11 +1,16 @@
 package com.tiagoespinha.popmovee.viewholders;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.squareup.picasso.Picasso;
 import com.tiagoespinha.popmovee.MovieDetailsActivity;
 import com.tiagoespinha.popmovee.R;
@@ -17,12 +22,14 @@ import com.tiagoespinha.popmovee.model.MovieMetadata;
 
 public class MovieThumbnailViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private ImageView mMovieItemImageView;
-    private MovieMetadata mMovieMetadata;
+    private TextView mMovieItemTextOverlay;
 
+    private MovieMetadata mMovieMetadata;
     public MovieThumbnailViewHolder(View itemView) {
         super(itemView);
 
         mMovieItemImageView = (ImageView) itemView.findViewById(R.id.iv_movie_grid_item);
+        mMovieItemTextOverlay = (TextView) itemView.findViewById(R.id.tv_movie_grid_text_overlay);
         mMovieItemImageView.setOnClickListener(this);
     }
 
@@ -42,8 +49,11 @@ public class MovieThumbnailViewHolder extends RecyclerView.ViewHolder implements
 
     public void setPosterMetadata(MovieMetadata movieMetadata) {
         mMovieMetadata = movieMetadata;
+
+        mMovieItemTextOverlay.setText(mMovieMetadata.getOriginalTitle());
         Picasso.with(mMovieItemImageView.getContext())
                 .load(movieMetadata.getPosterThumbnailURL().toString())
+                .error(R.mipmap.transparent)
                 .into(mMovieItemImageView);
     }
 }

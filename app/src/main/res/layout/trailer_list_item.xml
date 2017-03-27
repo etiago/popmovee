@@ -5,13 +5,13 @@
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:src="@mipmap/ic_play_circle_outline_black_24dp" />
+        android:src="@mipmap/ic_play_circle_outline_black_24dp"
+        android:id="@+id/iv_play_trailer"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="24sp"
         android:gravity="center_vertical"
         android:padding="5dp"
-        android:id="@+id/tv_trailer_name"
-        android:text="Foobar"/>
+        android:id="@+id/tv_trailer_name" />
 </LinearLayout>
